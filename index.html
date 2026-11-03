@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Assignment Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Student Assignment Tracker</h1>
+        <p>Keep track of your assignments and due dates.</p>
+    </header>
+
+    <main>
+        <section class="assignment-form">
+            <h2>Add a New Assignment</h2>
+
+            <form id="assignmentForm">
+                <label for="title">Assignment Title</label>
+                <input type="text" id="title" placeholder="Enter assignment title">
+
+                <label for="course">Course Name</label>
+                <input type="text" id="course" placeholder="Enter course name">
+
+                <label for="dueDate">Due Date</label>
+                <input type="date" id="dueDate">
+
+                <label for="description">Description (Optional)</label>
+                <textarea id="description" placeholder="Enter assignment details"></textarea>
+
+                <button type="submit">Add Assignment</button>
+
+                <p id="errorMessage"></p>
+            </form>
+        </section>
+
+        <section class="assignment-list">
+            <h2>My Assignments</h2>
+            <div id="assignments">
+                <p>No assignments added yet.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Student Assignment Tracker</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
