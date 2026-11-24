@@ -19,26 +19,32 @@
             <h2>Add a New Assignment</h2>
 
             <form id="assignmentForm">
+
                 <label for="title">Assignment Title</label>
-                <input type="text" id="title" placeholder="Enter assignment title">
+                <input type="text" id="title"
+                       placeholder="Enter assignment title">
 
                 <label for="course">Course Name</label>
-                <input type="text" id="course" placeholder="Enter course name">
+                <input type="text" id="course"
+                       placeholder="Enter course name">
 
                 <label for="dueDate">Due Date</label>
                 <input type="date" id="dueDate">
 
                 <label for="description">Description (Optional)</label>
-                <textarea id="description" placeholder="Enter assignment details"></textarea>
+                <textarea id="description"
+                          placeholder="Enter assignment details"></textarea>
 
                 <button type="submit">Add Assignment</button>
 
                 <p id="errorMessage"></p>
+
             </form>
         </section>
 
         <section class="assignment-list">
             <h2>My Assignments</h2>
+
             <div id="assignments">
                 <p>No assignments added yet.</p>
             </div>
@@ -49,6 +55,14 @@
         <p>Student Assignment Tracker</p>
     </footer>
 
+    <!-- Load assignment logic first -->
+    <script src="assignmentManager.js"></script>
+
+    <!-- Load assignment storage second -->
+    <script src="assignmentStorage.js"></script>
+
+    <!-- Load the main application last -->
     <script src="script.js"></script>
+
 </body>
 </html>
