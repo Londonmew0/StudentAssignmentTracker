@@ -1,0 +1,12 @@
+
+# Installed Node.js dependencies
+node_modules/
+
+# Automated test coverage reports
+coverage/
+
+# Environment files
+.env
+
+# Log files
+*.log

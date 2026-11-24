@@ -1,0 +1,24 @@
+{
+  "name": "studentassignmenttracker",
+  "version": "1.0.0",
+  "description": "Student Assignment Tracker is a web application designed to help students organize their school assignments and keep track of upcoming due dates.",
+  "main": "assignmentManager.js",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Londonmew0/StudentAssignmentTracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Londonmew0/StudentAssignmentTracker/issues"
+  },
+  "homepage": "https://github.com/Londonmew0/StudentAssignmentTracker#readme",
+  "devDependencies": {
+    "vitest": "^5.1.1"
+  }
+}
