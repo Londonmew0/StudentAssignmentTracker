@@ -1,16 +1,13 @@
 
-/*
- * Assignment Manager
- *
- * Handles assignment-related operations separately
- * from the website's display and storage code.
- */
+// Assignment Manager
+// Handles assignment operations separately from
+// the user interface and storage.
 
-// Create a new assignment object
+// Create and validate a new assignment
 function createAssignment(title, course, dueDate, description) {
 
-    // Validate required information
     if (!title || !title.trim() || !dueDate) {
+
         throw new Error("Assignment title and due date are required.");
     }
 
@@ -26,8 +23,8 @@ function createAssignment(title, course, dueDate, description) {
 // Change an assignment's completion status
 function changeCompletionStatus(assignment) {
 
-    // Check for an invalid assignment
     if (!assignment || typeof assignment !== "object") {
+
         throw new Error("Invalid assignment.");
     }
 
@@ -37,10 +34,37 @@ function changeCompletionStatus(assignment) {
     };
 }
 
-// Export functions for automated testing in Node.js
+// Delete an assignment using its index
+function deleteAssignment(assignments, index) {
+
+    // Verify that the assignment list is an array
+    if (!Array.isArray(assignments)) {
+
+        throw new Error("Invalid assignment list.");
+    }
+
+    // Verify that the index is valid
+    if (!Number.isInteger(index) ||
+        index < 0 ||
+        index >= assignments.length) {
+
+        throw new Error("Invalid assignment index.");
+    }
+
+    // Return a new list without the selected assignment
+    return assignments.filter(function(assignment, currentIndex) {
+
+        return currentIndex !== index;
+
+    });
+}
+
+// Export functions for automated testing
 if (typeof module !== "undefined" && module.exports) {
+
     module.exports = {
         createAssignment,
-        changeCompletionStatus
+        changeCompletionStatus,
+        deleteAssignment
     };
 }
