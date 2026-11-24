@@ -82,3 +82,51 @@ Future versions may include:
 ## Sprint 1 Status
 
 The initial assignment entry, local storage system, assignment display, and input validation features have been implemented.
+
+
+## Sprint 2: Assignment Completion
+
+Users can now mark assignments as completed or incomplete.
+Completion status is saved using browser localStorage.
+
+### How to Mark an Assignment as Completed
+
+1. Add an assignment or locate an existing assignment.
+2. Click "Mark as Completed".
+3. The assignment will turn green and its title will be crossed out.
+4. Click "Mark as Incomplete" to reverse the status.
+5. Refresh the page to verify that the status remains saved.
+
+### SOLID Principles
+
+- Single Responsibility Principle: Assignment logic, storage,
+  and user interface responsibilities are separated into
+  different JavaScript files.
+
+- Dependency Inversion Principle: AssignmentStorage receives
+  a storage provider, allowing real browser storage or fake
+  storage to be used.
+
+### Automated Testing
+
+Prerequisites:
+- Node.js
+- npm
+
+Open a terminal in the StudentAssignmentTracker folder.
+
+Install the required dependencies:
+
+    npm ci
+
+Run the automated tests:
+
+    npm test
+
+Windows PowerShell users can alternatively run:
+
+    npm.cmd ci
+    npm.cmd test
+
+The tests cover assignment creation, completion status,
+input validation, and assignment storage.
