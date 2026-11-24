@@ -149,3 +149,28 @@ footer {
 .assignment-item button:hover {
     background-color: #219150;
 }
+
+/* Sprint 2: Assignment deletion */
+
+/* Position assignment buttons next to each other */
+.assignment-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Red delete button */
+.assignment-item .delete-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Delete button hover effect */
+.assignment-item .delete-button:hover {
+    background-color: #b02a37;
+}

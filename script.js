@@ -5,13 +5,12 @@ const assignmentsContainer = document.getElementById("assignments");
 const errorMessage = document.getElementById("errorMessage");
 
 // Provide browser storage to the storage component
-// Dependency Inversion Principle
 const assignmentStorage = new AssignmentStorage(localStorage);
 
 // Load previously saved assignments
 let assignments = assignmentStorage.loadAssignments();
 
-// Save assignments using the storage component
+// Save assignments
 function saveAssignments() {
     assignmentStorage.saveAssignments(assignments);
 }
@@ -25,17 +24,46 @@ function toggleAssignmentCompletion(index) {
     displayAssignments();
 }
 
+// Remove an assignment
+function removeAssignment(index) {
+
+    // Ask the user to confirm deletion
+    const confirmed = window.confirm(
+        "Are you sure you want to delete this assignment?"
+    );
+
+    // Stop if the user selects Cancel
+    if (!confirmed) {
+        return;
+    }
+
+    try {
+
+        // Delete the selected assignment
+        assignments = deleteAssignment(assignments, index);
+
+        // Save the updated list
+        saveAssignments();
+
+        // Refresh the displayed assignments
+        displayAssignments();
+
+    } catch (error) {
+
+        errorMessage.textContent = error.message;
+    }
+}
+
 // Display all saved assignments
 function displayAssignments() {
 
     // Clear the current assignment list
     assignmentsContainer.innerHTML = "";
 
-    // Display a message if there are no assignments
+    // Display a message if no assignments exist
     if (assignments.length === 0) {
 
         const message = document.createElement("p");
-
         message.textContent = "No assignments added yet.";
 
         assignmentsContainer.appendChild(message);
@@ -43,7 +71,7 @@ function displayAssignments() {
         return;
     }
 
-    // Loop through every saved assignment
+    // Loop through every assignment
     assignments.forEach(function(assignment, index) {
 
         // Create the assignment container
@@ -54,7 +82,7 @@ function displayAssignments() {
         const title = document.createElement("h3");
         title.textContent = assignment.title;
 
-        // Display the course name
+        // Display the course
         const course = document.createElement("p");
         course.textContent = "Course: " + assignment.course;
 
@@ -68,7 +96,7 @@ function displayAssignments() {
         description.textContent = "Description: " +
             (assignment.description || "No description provided.");
 
-        // Display the completion status
+        // Display completion status
         const status = document.createElement("p");
 
         status.textContent = assignment.completed
@@ -84,10 +112,24 @@ function displayAssignments() {
             ? "Mark as Incomplete"
             : "Mark as Completed";
 
-        // Change completion status when clicked
+        // Handle completion button clicks
         completeButton.addEventListener("click", function() {
 
             toggleAssignmentCompletion(index);
+
+        });
+
+        // Create the delete button
+        const deleteButton = document.createElement("button");
+
+        deleteButton.type = "button";
+        deleteButton.textContent = "Delete";
+        deleteButton.classList.add("delete-button");
+
+        // Handle delete button clicks
+        deleteButton.addEventListener("click", function() {
+
+            removeAssignment(index);
 
         });
 
@@ -95,18 +137,25 @@ function displayAssignments() {
         if (assignment.completed) {
 
             assignmentItem.classList.add("completed");
-
         }
 
-        // Add all information to the assignment container
+        // Create a container for both buttons
+        const buttonContainer = document.createElement("div");
+
+        buttonContainer.classList.add("assignment-buttons");
+
+        buttonContainer.appendChild(completeButton);
+        buttonContainer.appendChild(deleteButton);
+
+        // Add assignment information to the container
         assignmentItem.appendChild(title);
         assignmentItem.appendChild(course);
         assignmentItem.appendChild(dueDate);
         assignmentItem.appendChild(description);
         assignmentItem.appendChild(status);
-        assignmentItem.appendChild(completeButton);
+        assignmentItem.appendChild(buttonContainer);
 
-        // Add the assignment to the website
+        // Display the assignment
         assignmentsContainer.appendChild(assignmentItem);
 
     });
@@ -120,16 +169,13 @@ assignmentForm.addEventListener("submit", function(event) {
 
     // Get the information entered by the user
     const title = document.getElementById("title").value.trim();
-
     const course = document.getElementById("course").value.trim();
-
     const dueDate = document.getElementById("dueDate").value;
-
     const description = document.getElementById("description").value.trim();
 
     try {
 
-        // Create and validate the assignment using assignmentManager.js
+        // Create and validate the assignment
         const newAssignment = createAssignment(
             title,
             course,
@@ -137,16 +183,14 @@ assignmentForm.addEventListener("submit", function(event) {
             description
         );
 
-        // Clear any previous error messages
+        // Clear previous error messages
         errorMessage.textContent = "";
 
         // Add the new assignment
         assignments.push(newAssignment);
 
-        // Save assignments
+        // Save and display assignments
         saveAssignments();
-
-        // Update the assignment list
         displayAssignments();
 
         // Clear the form
@@ -156,10 +200,9 @@ assignmentForm.addEventListener("submit", function(event) {
 
         // Display validation errors
         errorMessage.textContent = error.message;
-
     }
 
 });
 
-// Display previously saved assignments when the page loads
+// Display saved assignments when the page loads
 displayAssignments();
