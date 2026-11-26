@@ -130,3 +130,18 @@ Windows PowerShell users can alternatively run:
 
 The tests cover assignment creation, completion status,
 input validation, and assignment storage.
+
+## Sprint 3: Upcoming Assignments
+
+Assignments are automatically organized by priority
+and due date.
+
+- Incomplete assignments appear first.
+- Assignments with earlier due dates appear first
+  within each completion group.
+- Completed assignments appear below incomplete assignments.
+- Sorting automatically updates when assignments are
+  added, completed, or deleted.
+
+Ten additional automated tests were added to verify
+assignment sorting and compatibility with existing features.
