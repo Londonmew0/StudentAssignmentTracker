@@ -42,10 +42,7 @@ function removeAssignment(index) {
         // Delete the selected assignment
         assignments = deleteAssignment(assignments, index);
 
-        // Save the updated list
         saveAssignments();
-
-        // Refresh the displayed assignments
         displayAssignments();
 
     } catch (error) {
@@ -56,6 +53,9 @@ function removeAssignment(index) {
 
 // Display all saved assignments
 function displayAssignments() {
+
+    // Sort assignments before displaying them
+    assignments = sortAssignments(assignments);
 
     // Clear the current assignment list
     assignmentsContainer.innerHTML = "";
@@ -71,7 +71,7 @@ function displayAssignments() {
         return;
     }
 
-    // Loop through every assignment
+    // Loop through the sorted assignments
     assignments.forEach(function(assignment, index) {
 
         // Create the assignment container
@@ -116,7 +116,6 @@ function displayAssignments() {
         completeButton.addEventListener("click", function() {
 
             toggleAssignmentCompletion(index);
-
         });
 
         // Create the delete button
@@ -130,7 +129,6 @@ function displayAssignments() {
         deleteButton.addEventListener("click", function() {
 
             removeAssignment(index);
-
         });
 
         // Apply completed assignment styling
@@ -157,7 +155,6 @@ function displayAssignments() {
 
         // Display the assignment
         assignmentsContainer.appendChild(assignmentItem);
-
     });
 }
 
@@ -201,8 +198,7 @@ assignmentForm.addEventListener("submit", function(event) {
         // Display validation errors
         errorMessage.textContent = error.message;
     }
-
 });
 
-// Display saved assignments when the page loads
+// Display and sort saved assignments when the page loads
 displayAssignments();
