@@ -57,6 +57,8 @@ function removeAssignment(index) {
 // Display all saved assignments
 function displayAssignments() {
 
+    // Sort assignments before displaying them
+    assignments = sortAssignments(assignments);
     // Clear the current assignment list
     assignmentsContainer.innerHTML = "";
 
