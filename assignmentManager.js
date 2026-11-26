@@ -1,6 +1,6 @@
 
 // Assignment Manager
-// Handles assignment operations separately from
+// Handles assignment logic separately from
 // the user interface and storage.
 
 // Create and validate a new assignment
@@ -37,13 +37,13 @@ function changeCompletionStatus(assignment) {
 // Delete an assignment using its index
 function deleteAssignment(assignments, index) {
 
-    // Verify that the assignment list is an array
+    // Validate the assignment list
     if (!Array.isArray(assignments)) {
 
         throw new Error("Invalid assignment list.");
     }
 
-    // Verify that the index is valid
+    // Validate the index
     if (!Number.isInteger(index) ||
         index < 0 ||
         index >= assignments.length) {
@@ -55,7 +55,30 @@ function deleteAssignment(assignments, index) {
     return assignments.filter(function(assignment, currentIndex) {
 
         return currentIndex !== index;
+    });
+}
 
+// Sort assignments by completion status and due date
+function sortAssignments(assignments) {
+
+    // Validate the assignment list
+    if (!Array.isArray(assignments)) {
+
+        throw new Error("Invalid assignment list.");
+    }
+
+    // Create a copy to preserve the original array
+    return [...assignments].sort(function(a, b) {
+
+        // Incomplete assignments appear first
+        if (Boolean(a.completed) !== Boolean(b.completed)) {
+
+            return Number(Boolean(a.completed)) -
+                   Number(Boolean(b.completed));
+        }
+
+        // Sort by earliest due date
+        return a.dueDate.localeCompare(b.dueDate);
     });
 }
 
@@ -65,6 +88,7 @@ if (typeof module !== "undefined" && module.exports) {
     module.exports = {
         createAssignment,
         changeCompletionStatus,
-        deleteAssignment
+        deleteAssignment,
+        sortAssignments
     };
 }
